@@ -1,0 +1,79 @@
+Here are a few ways to generate Fibonacci numbers in Dart:
+
+1. Using Recursion (Not optimal for large inputs)
+dart
+Copy
+Edit
+int fibonacci(int n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+void main() {
+  int n = 10;
+  print("Fibonacci($n): ${fibonacci(n)}");
+}
+🔹 Time Complexity: O(2ⁿ) (exponential, very slow for large values).
+🔹 Space Complexity: O(n) (due to recursive calls).
+
+2. Using Memoization (Dynamic Programming - Top-Down Approach)
+dart
+Copy
+Edit
+Map<int, int> memo = {};
+
+int fibonacciMemo(int n) {
+  if (n <= 1) return n;
+  if (memo.containsKey(n)) return memo[n]!;
+  memo[n] = fibonacciMemo(n - 1) + fibonacciMemo(n - 2);
+  return memo[n]!;
+}
+
+void main() {
+  int n = 10;
+  print("Fibonacci($n): ${fibonacciMemo(n)}");
+}
+🔹 Time Complexity: O(n)
+🔹 Space Complexity: O(n) (due to the hashmap).
+
+3. Using Iteration (Optimal for Large Inputs)
+dart
+Copy
+Edit
+int fibonacciIterative(int n) {
+  if (n <= 1) return n;
+  int a = 0, b = 1, c;
+  for (int i = 2; i <= n; i++) {
+    c = a + b;
+    a = b;
+    b = c;
+  }
+  return b;
+}
+
+void main() {
+  int n = 10;
+  print("Fibonacci($n): ${fibonacciIterative(n)}");
+}
+🔹 Time Complexity: O(n)
+🔹 Space Complexity: O(1) (only a few variables used).
+
+4. Generating Fibonacci Sequence using List
+dart
+Copy
+Edit
+List<int> fibonacciSeries(int n) {
+  List<int> series = [0, 1];
+  for (int i = 2; i < n; i++) {
+    series.add(series[i - 1] + series[i - 2]);
+  }
+  return series;
+}
+
+void main() {
+  int n = 10;
+  print("Fibonacci Series up to $n terms: ${fibonacciSeries(n)}");
+}
+🔹 Time Complexity: O(n)
+🔹 Space Complexity: O(n) (for storing the sequence).
+
